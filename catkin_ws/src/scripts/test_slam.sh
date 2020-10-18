@@ -4,7 +4,7 @@ xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setu
 
 sleep 5
 
-xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; roslaunch gmapping slam_gmapping_pr2.launch" &
+xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; roslaunch turtlebot_navigation gmapping_demo.launch" &
 
 sleep 2
 
