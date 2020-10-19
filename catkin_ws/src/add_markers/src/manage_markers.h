@@ -54,5 +54,12 @@ void SetMarkerPosition(visualization_msgs::Marker& marker, float x, float y,
   marker.pose.orientation.w = orientation;
 }
 
+void RemoveMarker(visualization_msgs::Marker& marker){
+  marker.action = visualization_msgs::Marker::DELETE;
+}
+
+void AddMarker(visualization_msgs::Marker& marker){
+  marker.action = visualization_msgs::Marker::ADD;
+}
 
 #endif // UDACITY_HOME_SERVICE_ROBOT_MANAGE_MARKERS_H

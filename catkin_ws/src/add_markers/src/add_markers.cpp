@@ -30,11 +30,11 @@ int main( int argc, char** argv )
     marker_pub.publish(marker);
     sleep(5);
     
-    marker.action = visualization_msgs::Marker::DELETE;
+    RemoveMarker(marker);
     marker_pub.publish(marker);
     sleep(5);
 
-    marker.action = visualization_msgs::Marker::ADD;
+    AddMarker(marker);
     SetMarkerPosition(marker, -3.5, -7.5, 1.0);
     marker_pub.publish(marker);
     sleep(5);
