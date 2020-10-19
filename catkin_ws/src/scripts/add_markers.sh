@@ -14,5 +14,4 @@ xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setu
 
 sleep 5
 
-xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel
-/setup.bash; rosrun add_markers add_markers"
+xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; rosrun add_markers add_markers"
