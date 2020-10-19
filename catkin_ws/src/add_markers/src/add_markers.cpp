@@ -6,33 +6,10 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
 
-
-void SetMarkerPosition(visualization_msgs::Marker& marker, float x, float y,
-                      float
-                                                                   orientation){
-  // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-  marker.pose.position.x = x;
-  marker.pose.position.y = y;
-  marker.pose.position.z = 0;
-  marker.pose.orientation.x = 0.0;
-  marker.pose.orientation.y = 0.0;
-  marker.pose.orientation.z = 0.0;
-  marker.pose.orientation.w = orientation;
-}
-int main( int argc, char** argv )
-{
-  ros::init(argc, argv, "add_markers");
-  ros::NodeHandle n;
-  ros::Rate r(1);
-  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-
-  // Set our initial shape type to be a cube
-  uint32_t shape_cube = visualization_msgs::Marker::CUBE;
-
-  while (ros::ok())
-  {
+visualization_msgs::Marker CreateMarker(){
     visualization_msgs::Marker marker;
-    // Set the frame ID and timestamp.  See the TF tutorials for information on these.
+    uint32_t shape_cube = visualization_msgs::Marker::CUBE;
+
     marker.header.frame_id = "/map";
     marker.header.stamp = ros::Time::now();
 
@@ -61,10 +38,29 @@ int main( int argc, char** argv )
     marker.color.a = 1.0;
 
     marker.lifetime = ros::Duration();
+    return marker;
+}
 
+void SetMarkerPosition(visualization_msgs::Marker& marker, float x, float y,
+                      float
+                                                                   orientation){
+  marker.pose.position.x = x;
+  marker.pose.position.y = y;
+  marker.pose.position.z = 0;
+  marker.pose.orientation.x = 0.0;
+  marker.pose.orientation.y = 0.0;
+  marker.pose.orientation.z = 0.0;
+  marker.pose.orientation.w = orientation;
+}
+int main( int argc, char** argv )
+{
+  ros::init(argc, argv, "add_markers");
+  ros::NodeHandle n;
+  ros::Rate r(1);
+  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
-    SetMarkerPosition(marker, -2.0, -6.0, 1.0);
-    // Publish the marker
+  while (ros::ok())
+  {
     while (marker_pub.getNumSubscribers() < 1)
     {
       if (!ros::ok())
@@ -74,6 +70,9 @@ int main( int argc, char** argv )
       ROS_WARN_ONCE("Please create a subscriber to the marker");
       sleep(1);
     }
+
+    auto marker = CreateMarker();
+    SetMarkerPosition(marker, -2.0, -6.0, 1.0);
     marker_pub.publish(marker);
     sleep(5);
     
@@ -83,7 +82,6 @@ int main( int argc, char** argv )
 
     marker.action = visualization_msgs::Marker::ADD;
     SetMarkerPosition(marker, -3.5, -7.5, 1.0);
-    
     marker_pub.publish(marker);
     sleep(5);
 
