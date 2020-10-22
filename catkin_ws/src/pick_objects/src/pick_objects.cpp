@@ -51,12 +51,13 @@ int main(int argc, char** argv){
   ros::init(argc, argv, "pick_objects");
   ros::NodeHandle n;
   marker_pub = n.advertise<pick_objects::pick_objects>
-      ("pick_objects", 1);
+      ("/pick_objects", 1);
 
 
   //tell the action client that we want to spin a thread by default
   MoveBaseClient ac("move_base", true);
-
+  ROS_INFO("ready to publish");
+ publishPikingObject(-2.0, -6.0, 1.0);
   // Wait 5 sec for move_base action server to come up
   while(!ac.waitForServer(ros::Duration(5.0))){
     ROS_INFO("Waiting for the move_base action server to come up");

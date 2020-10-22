@@ -10,11 +10,15 @@ xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setu
 
 sleep 2
 
-xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; roslaunch turtlebot_rviz_launchers view_navigation.launch" &
+xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; roslaunch turtlebot_rviz_launchers view_home_service_navigation.launch" &
 
 sleep 5
 
 xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; rosrun add_markers add_markers" & 
+
+sleep 1
+
+xterm -e "source /home/workspace/udacity_home_service_robot/catkin_ws/devel/setup.bash; rostopic echo /pick_objects" &
 
 sleep 1
 

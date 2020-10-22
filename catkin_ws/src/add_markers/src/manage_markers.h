@@ -28,15 +28,15 @@ visualization_msgs::Marker CreateMarker(){
 
 
   // Set the scale of the marker -- 1x1x1 here means 1m on a side
-  marker.scale.x = 1.0;
-  marker.scale.y = 1.0;
-  marker.scale.z = 1.0;
+  marker.scale.x = 0.3;
+  marker.scale.y = 0.3;
+  marker.scale.z = 0.3;
 
   // Set the color -- be sure to set alpha to something non-zero!
   marker.color.r = 0.0f;
-  marker.color.g = 1.0f;
-  marker.color.b = 0.0f;
-  marker.color.a = 1.0;
+  marker.color.g = 0.0f;
+  marker.color.b = 1.0f;
+  marker.color.a = 0.5;
 
   marker.lifetime = ros::Duration();
   return marker;

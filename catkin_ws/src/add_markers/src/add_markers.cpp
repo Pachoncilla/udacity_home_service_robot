@@ -7,7 +7,7 @@
 #include "manage_markers.h"
 #include <pick_objects/pick_objects.h>
 
-auto marker = CreateMarker();
+visualization_msgs::Marker marker;
 ros::Publisher marker_pub;
 
 void pick_callback(const pick_objects::pick_objects& msg){
@@ -18,6 +18,8 @@ void pick_callback(const pick_objects::pick_objects& msg){
     sleep(1);
   }
 
+  ROS_INFO("pick_callback");
+  if (!ros::ok()) return;
   if (msg.action == pick_objects::pick_objects::PICKING_OBJECT ||
       msg.action == pick_objects::pick_objects::OBJECT_DELIVERED) {
     AddMarker(marker);
@@ -36,9 +38,13 @@ int main( int argc, char** argv )
 {
   ros::init(argc, argv, "add_markers");
   ros::NodeHandle n;
-  ros::Rate r(1);
+  
   marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
-  ros::Subscriber pick_objects_sub = n.subscribe("pick_objects", 1000,
+  ros::Subscriber pick_objects_sub = n.subscribe("/pick_objects", 1000,
                                                  pick_callback);
+
+  marker = CreateMarker();
+  ros::spin();
+  return 0;                                          
 }
