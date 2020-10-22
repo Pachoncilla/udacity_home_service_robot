@@ -22,11 +22,7 @@ visualization_msgs::Marker CreateMarker(){
 
   // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
   marker.type = shape_cube;
-
-  // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
-  marker.action = visualization_msgs::Marker::ADD;
-
-
+  
   // Set the scale of the marker -- 1x1x1 here means 1m on a side
   marker.scale.x = 0.3;
   marker.scale.y = 0.3;

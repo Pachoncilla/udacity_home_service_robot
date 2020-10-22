@@ -84,11 +84,11 @@ int main(int argc, char** argv){
   sleep(5.0);
 
   ac.sendGoal(createGoal(-3.5, -7.5, 1.0));
-  publishObjectDelivered(-3.5, -7.5, 1.0);
+  
   ac.waitForResult();
   if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED) {
     ROS_INFO("Hooray, the base moved to the goal position to deliver the item");
-
+    publishObjectDelivered(-3.5, -7.5, 1.0);
   } else {
     ROS_INFO("The base failed to move to the delivery position for some reason");
 
